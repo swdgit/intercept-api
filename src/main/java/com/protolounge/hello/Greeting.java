@@ -1,4 +1,4 @@
-package hello;
+package com.protolounge.hello;
 
 public class Greeting {
 
