@@ -1,4 +1,4 @@
-package model;
+package com.protolounge.intercept.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
