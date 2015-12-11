@@ -15,4 +15,6 @@ import com.protolounge.intercept.domain.MVPMaterial;
 public interface MaterialService {
 
     public List<MVPMaterial> getAllMaterials() throws ProtoLoungeException;
+    
+    public MVPMaterial addMaterial(MVPMaterial material) throws ProtoLoungeException;
 }

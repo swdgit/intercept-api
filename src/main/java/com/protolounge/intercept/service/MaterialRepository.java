@@ -14,5 +14,8 @@ import com.protolounge.intercept.domain.MVPMaterial;
  *
  */
 public interface MaterialRepository extends Repository<MVPMaterial, Long> {
-    public List<MVPMaterial> findAll(); 
+    
+    public List<MVPMaterial> findAll();
+    
+    public MVPMaterial save(MVPMaterial material);
 }

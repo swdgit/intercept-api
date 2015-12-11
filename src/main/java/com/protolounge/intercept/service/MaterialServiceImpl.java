@@ -37,4 +37,9 @@ public class MaterialServiceImpl implements MaterialService {
     public List<MVPMaterial> getAllMaterials() throws ProtoLoungeException {
         return materialRepository.findAll();
     }
+
+    @Override
+    public MVPMaterial addMaterial(MVPMaterial material) throws ProtoLoungeException {
+        return materialRepository.save(material);
+    }
 }
