@@ -15,4 +15,5 @@ import com.protolounge.intercept.domain.MVPPrintSpecification;
  */
 public interface PrintSpecificationRepository extends Repository<MVPPrintSpecification, Long> {
     public List<MVPPrintSpecification> findAll(); 
+    public MVPPrintSpecification save(MVPPrintSpecification mvpPrintSpecification);
 }

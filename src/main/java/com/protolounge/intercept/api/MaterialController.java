@@ -23,7 +23,6 @@ import com.protolounge.intercept.service.MaterialService;
  */
 @RestController
 @RequestMapping("/materials")
-
 public class MaterialController {
    
     @Autowired

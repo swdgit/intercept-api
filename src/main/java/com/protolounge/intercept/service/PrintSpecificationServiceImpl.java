@@ -20,14 +20,14 @@ import com.protolounge.intercept.domain.MVPPrintSpecification;
 @Transactional
 public class PrintSpecificationServiceImpl implements PrintSpecificationService {
 
-    private final PrintSpecificationRepository PrintSpecificationRepository;
+    private final PrintSpecificationRepository printSpecificationRepository;
         
     /**
      * 
      */
     @Autowired
-    public PrintSpecificationServiceImpl(PrintSpecificationRepository PrintSpecificationRepository) {
-        this.PrintSpecificationRepository = PrintSpecificationRepository;
+    public PrintSpecificationServiceImpl(PrintSpecificationRepository printSpecificationRepository) {
+        this.printSpecificationRepository = printSpecificationRepository;
     }
 
     /* (non-Javadoc)
@@ -35,6 +35,11 @@ public class PrintSpecificationServiceImpl implements PrintSpecificationService 
      */
     @Override
     public List<MVPPrintSpecification> getAllPrintSpecifications() throws ProtoLoungeException {
-        return PrintSpecificationRepository.findAll();
+        return printSpecificationRepository.findAll();
+    }
+
+    @Override
+    public MVPPrintSpecification addMvpPrintSpecification(MVPPrintSpecification mvpPrintSpecification) throws ProtoLoungeException {
+        return printSpecificationRepository.save(mvpPrintSpecification);
     }
 }

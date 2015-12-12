@@ -20,14 +20,14 @@ import com.protolounge.intercept.domain.MVPSoftware;
 @Transactional
 public class SoftwareServiceImpl implements SoftwareService {
 
-    private final SoftwareRepository SoftwareRepository;
+    private final SoftwareRepository softwareRepository;
         
     /**
      * 
      */
     @Autowired
     public SoftwareServiceImpl(SoftwareRepository SoftwareRepository) {
-        this.SoftwareRepository = SoftwareRepository;
+        this.softwareRepository = SoftwareRepository;
     }
 
     /* (non-Javadoc)
@@ -35,6 +35,11 @@ public class SoftwareServiceImpl implements SoftwareService {
      */
     @Override
     public List<MVPSoftware> getAllSoftwares() throws ProtoLoungeException {
-        return SoftwareRepository.findAll();
+        return softwareRepository.findAll();
+    }
+
+    @Override
+    public MVPSoftware addSoftware(MVPSoftware mvpSoftware) throws ProtoLoungeException {
+        return softwareRepository.save(mvpSoftware);
     }
 }

@@ -20,14 +20,14 @@ import com.protolounge.intercept.domain.MVPPrinter;
 @Transactional
 public class PrinterServiceImpl implements PrinterService {
 
-    private final PrinterRepository PrinterRepository;
+    private final PrinterRepository printerRepository;
         
     /**
      * 
      */
     @Autowired
-    public PrinterServiceImpl(PrinterRepository PrinterRepository) {
-        this.PrinterRepository = PrinterRepository;
+    public PrinterServiceImpl(PrinterRepository printerRepository) {
+        this.printerRepository = printerRepository;
     }
 
     /* (non-Javadoc)
@@ -35,6 +35,11 @@ public class PrinterServiceImpl implements PrinterService {
      */
     @Override
     public List<MVPPrinter> getAllPrinters() throws ProtoLoungeException {
-        return PrinterRepository.findAll();
+        return printerRepository.findAll();
+    }
+
+    @Override
+    public MVPPrinter addPrinter(MVPPrinter printer) throws ProtoLoungeException {
+        return printerRepository.save(printer);
     }
 }
