@@ -17,4 +17,6 @@ public interface SoftwareService {
     public List<MVPSoftware> getAllSoftware() throws ProtoLoungeException;
     
     public MVPSoftware addSoftware(MVPSoftware mvpSoftware) throws ProtoLoungeException;
+    
+    public MVPSoftware findByTitleAndVersion(String title, String version) throws ProtoLoungeException;
 }

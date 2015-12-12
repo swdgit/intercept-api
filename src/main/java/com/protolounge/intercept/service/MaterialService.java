@@ -17,4 +17,6 @@ public interface MaterialService {
     public List<MVPMaterial> getAllMaterials() throws ProtoLoungeException;
     
     public MVPMaterial addMaterial(MVPMaterial material) throws ProtoLoungeException;
+    
+    public MVPMaterial findByName(String name) throws ProtoLoungeException;
 }

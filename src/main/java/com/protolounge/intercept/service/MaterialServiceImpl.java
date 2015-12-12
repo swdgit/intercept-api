@@ -5,6 +5,8 @@ package com.protolounge.intercept.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,8 @@ import com.protolounge.intercept.domain.MVPMaterial;
 @Component
 @Transactional
 public class MaterialServiceImpl implements MaterialService {
+
+    private final Logger log = LoggerFactory.getLogger(MaterialServiceImpl.class);
 
     private final MaterialRepository materialRepository;
         
@@ -40,6 +44,19 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public MVPMaterial addMaterial(MVPMaterial material) throws ProtoLoungeException {
-        return materialRepository.save(material);
+        
+        try {
+            MVPMaterial foundMaterial = findByName(material.getName());
+            material = foundMaterial != null ? foundMaterial : materialRepository.save(material);
+        } catch (Exception e) {
+            // logging here.
+            log.error(e.getMessage());
+        }
+        return material;
+    }
+
+    @Override
+    public MVPMaterial findByName(String name) throws ProtoLoungeException {
+        return materialRepository.findByName(name);
     }
 }

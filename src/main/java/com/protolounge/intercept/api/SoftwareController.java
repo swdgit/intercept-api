@@ -6,6 +6,8 @@ package com.protolounge.intercept.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import com.protolounge.intercept.service.SoftwareService;
 @RestController
 public class SoftwareController {
 
+    private final Logger log = LoggerFactory.getLogger(SoftwareController.class);
     @Autowired SoftwareService softwareService;
     
     /**
@@ -39,7 +42,7 @@ public class SoftwareController {
         try {
             return softwareService.getAllSoftware();
         } catch (ProtoLoungeException e) {
-            
+            log.error(e.getMessage());
         }
         return software;
     }
@@ -48,12 +51,14 @@ public class SoftwareController {
             value="/add",
             method=RequestMethod.POST,
             consumes=MediaType.APPLICATION_JSON_VALUE,
-            produces=MediaType.APPLICATION_JSON_VALUE
-            )    public void addMaterial(@RequestBody MVPSoftware software){
+            produces=MediaType.APPLICATION_JSON_VALUE)
+    public MVPSoftware addSoftware(@RequestBody MVPSoftware software){
+        
         try {
-            softwareService.addSoftware(software);
+            software = softwareService.addSoftware(software);
         } catch (ProtoLoungeException e) {
-            // really need to add in logger stuff here... ;)
+            log.error(e.getMessage());
         }
+        return software;
     }    
 }

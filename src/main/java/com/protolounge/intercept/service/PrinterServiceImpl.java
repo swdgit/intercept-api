@@ -5,6 +5,8 @@ package com.protolounge.intercept.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import com.protolounge.intercept.domain.MVPPrinter;
 @Transactional
 public class PrinterServiceImpl implements PrinterService {
 
+    private final Logger log = LoggerFactory.getLogger(PrinterServiceImpl.class);
     private final PrinterRepository printerRepository;
     
     /**
@@ -42,15 +45,12 @@ public class PrinterServiceImpl implements PrinterService {
     public MVPPrinter addPrinter(MVPPrinter printer) throws ProtoLoungeException {
         
         try {
-            MVPPrinter e = printerRepository.findByName(printer.getName());
-            if (e != null) {
-                printer = e;
-            } else {
-                printer =  printerRepository.save(printer);
-            }
-        } catch(javax.persistence.RollbackException e) {
-            // how to find out the reason for the rollback exception?
-            System.out.println(e.getMessage());
+            MVPPrinter foundPrinter = printerRepository.findByName(printer.getName());
+            
+            printer = foundPrinter != null ? foundPrinter :  printerRepository.save(printer); 
+            
+        } catch(Exception e) {
+            log.error(e.getMessage());
         }
         return printer;
     }

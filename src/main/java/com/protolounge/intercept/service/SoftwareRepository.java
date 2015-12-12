@@ -16,4 +16,5 @@ import com.protolounge.intercept.domain.MVPSoftware;
 public interface SoftwareRepository extends Repository<MVPSoftware, Long> {
     public List<MVPSoftware> findAll(); 
     public MVPSoftware save(MVPSoftware mvpSoftware);
+    public MVPSoftware findByTitleAndVersion(String title, String version);
 }

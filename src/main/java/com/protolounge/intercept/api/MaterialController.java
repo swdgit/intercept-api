@@ -6,6 +6,8 @@ package com.protolounge.intercept.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +26,8 @@ import com.protolounge.intercept.service.MaterialService;
 @RestController
 @RequestMapping("/materials")
 public class MaterialController {
-   
+    private final Logger log = LoggerFactory.getLogger(MaterialController.class);
+
     @Autowired
     MaterialService materialService;
     
@@ -40,7 +43,7 @@ public class MaterialController {
         try {
             return materialService.getAllMaterials();
         } catch (ProtoLoungeException e) {
-            
+            log.error(e.getMessage());
         }
         return materials;
     }
@@ -49,12 +52,13 @@ public class MaterialController {
             value="/add",
             method=RequestMethod.POST,
             consumes=MediaType.APPLICATION_JSON_VALUE,
-            produces=MediaType.APPLICATION_JSON_VALUE
-            )    public void addMaterial(@RequestBody MVPMaterial material){
+            produces=MediaType.APPLICATION_JSON_VALUE)
+    public MVPMaterial addMaterial(@RequestBody MVPMaterial material){
         try {
-            materialService.addMaterial(material);
+            material = materialService.addMaterial(material);
         } catch (ProtoLoungeException e) {
-            // really need to add in logger stuff here... ;)
+            log.error(e.getMessage());
         }
+        return material;
     }
 }

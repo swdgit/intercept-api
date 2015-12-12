@@ -40,6 +40,17 @@ public class SoftwareServiceImpl implements SoftwareService {
 
     @Override
     public MVPSoftware addSoftware(MVPSoftware mvpSoftware) throws ProtoLoungeException {
-        return softwareRepository.save(mvpSoftware);
+        try {
+            MVPSoftware foundSoftware = softwareRepository.findByTitleAndVersion(mvpSoftware.getTitle(), mvpSoftware.getVersion());
+            mvpSoftware = foundSoftware != null ? foundSoftware : softwareRepository.save(mvpSoftware);
+        } catch (Exception e) {
+        }
+        
+        return mvpSoftware;
+    }
+
+    @Override
+    public MVPSoftware findByTitleAndVersion(String title, String version) throws ProtoLoungeException {
+        return softwareRepository.findByTitleAndVersion(title, version);
     }
 }
