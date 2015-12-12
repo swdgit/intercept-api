@@ -17,4 +17,6 @@ public interface PrinterService {
     public List<MVPPrinter> getAllPrinters() throws ProtoLoungeException;
 
     public MVPPrinter addPrinter(MVPPrinter printer) throws ProtoLoungeException;
+    
+    public MVPPrinter findByName(String name) throws ProtoLoungeException;
 }

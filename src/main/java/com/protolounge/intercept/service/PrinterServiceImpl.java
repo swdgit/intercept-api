@@ -21,7 +21,7 @@ import com.protolounge.intercept.domain.MVPPrinter;
 public class PrinterServiceImpl implements PrinterService {
 
     private final PrinterRepository printerRepository;
-        
+    
     /**
      * 
      */
@@ -40,6 +40,24 @@ public class PrinterServiceImpl implements PrinterService {
 
     @Override
     public MVPPrinter addPrinter(MVPPrinter printer) throws ProtoLoungeException {
-        return printerRepository.save(printer);
+        
+        try {
+            MVPPrinter e = printerRepository.findByName(printer.getName());
+            if (e != null) {
+                printer = e;
+            } else {
+                printer =  printerRepository.save(printer);
+            }
+        } catch(javax.persistence.RollbackException e) {
+            // how to find out the reason for the rollback exception?
+            System.out.println(e.getMessage());
+        }
+        return printer;
+    }
+
+    @Override
+    public MVPPrinter findByName(String name) throws ProtoLoungeException {
+        MVPPrinter printer = printerRepository.findByName(name);
+        return printer;
     }
 }

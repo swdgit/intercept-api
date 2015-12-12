@@ -47,12 +47,13 @@ public class PrinterController {
             value="/add",
             method=RequestMethod.POST,
             consumes=MediaType.APPLICATION_JSON_VALUE,
-            produces=MediaType.APPLICATION_JSON_VALUE
-            )    public void addMaterial(@RequestBody MVPPrinter printer){
+            produces=MediaType.APPLICATION_JSON_VALUE)
+    public MVPPrinter addPrinter(@RequestBody MVPPrinter printer) {
         try {
-            printerService.addPrinter(printer);
+            printer = printerService.addPrinter(printer);
         } catch (ProtoLoungeException e) {
             // really need to add in logger stuff here... ;)
         }
+        return printer;
     }
 }

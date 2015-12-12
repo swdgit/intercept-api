@@ -18,4 +18,6 @@ public interface PrinterRepository extends Repository<MVPPrinter, Long> {
     public List<MVPPrinter> findAll(); 
     
     public MVPPrinter save(MVPPrinter printer);
+    
+    public MVPPrinter findByName(String name);
 }

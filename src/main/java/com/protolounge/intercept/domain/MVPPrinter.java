@@ -23,9 +23,12 @@ public class MVPPrinter implements Serializable {
 	@Lob
 	private String description;
 
-	@Column(name="manufacturer_url")
+	@Column(name="manufacturer_url", 
+	        nullable=false)
 	private String manufacturerUrl;
-
+	
+	@Column(name="name", 
+	        unique=true)
 	private String name;
 
 	//bi-directional many-to-one association to MVPPrintSpecification
