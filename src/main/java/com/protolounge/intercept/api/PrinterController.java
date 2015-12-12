@@ -3,6 +3,9 @@
  */
 package com.protolounge.intercept.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +32,17 @@ public class PrinterController {
     public PrinterController() {
     }
 
+    @RequestMapping("/all")
+    public List<MVPPrinter> getMaterials() {
+        List<MVPPrinter> printers = new ArrayList<>();
+        try {
+            return printerService.getAllPrinters();
+        } catch (ProtoLoungeException e) {
+            
+        }
+        return printers;
+    }
+    
     @RequestMapping(
             value="/add",
             method=RequestMethod.POST,
@@ -41,5 +55,4 @@ public class PrinterController {
             // really need to add in logger stuff here... ;)
         }
     }
-
 }

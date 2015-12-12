@@ -14,7 +14,7 @@ import com.protolounge.intercept.domain.MVPSoftware;
  */
 public interface SoftwareService {
 
-    public List<MVPSoftware> getAllSoftwares() throws ProtoLoungeException;
+    public List<MVPSoftware> getAllSoftware() throws ProtoLoungeException;
     
     public MVPSoftware addSoftware(MVPSoftware mvpSoftware) throws ProtoLoungeException;
 }

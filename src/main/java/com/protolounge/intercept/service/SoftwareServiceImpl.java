@@ -34,7 +34,7 @@ public class SoftwareServiceImpl implements SoftwareService {
      * @see com.protolounge.intercept.service.SoftwareService#getAllSoftwares()
      */
     @Override
-    public List<MVPSoftware> getAllSoftwares() throws ProtoLoungeException {
+    public List<MVPSoftware> getAllSoftware() throws ProtoLoungeException {
         return softwareRepository.findAll();
     }
 
