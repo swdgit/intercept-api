@@ -24,6 +24,7 @@ import com.protolounge.intercept.service.SoftwareService;
  *
  */
 @RestController
+@RequestMapping("/software")
 public class SoftwareController {
 
     private final Logger log = LoggerFactory.getLogger(SoftwareController.class);

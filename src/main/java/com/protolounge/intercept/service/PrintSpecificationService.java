@@ -15,5 +15,5 @@ import com.protolounge.intercept.domain.MVPPrintSpecification;
 public interface PrintSpecificationService {
 
     public List<MVPPrintSpecification> getAllPrintSpecifications() throws ProtoLoungeException;
-    public MVPPrintSpecification addMvpPrintSpecification(MVPPrintSpecification mvpPrintSpecification) throws ProtoLoungeException;
+    public MVPPrintSpecification addPrintSpecification(MVPPrintSpecification mvpPrintSpecification) throws ProtoLoungeException;
 }
