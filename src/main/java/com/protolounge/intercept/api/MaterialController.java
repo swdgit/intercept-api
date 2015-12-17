@@ -24,7 +24,7 @@ import com.protolounge.intercept.service.MaterialService;
  *
  */
 @RestController
-@RequestMapping("/materials")
+@RequestMapping("/material")
 public class MaterialController {
     private final Logger log = LoggerFactory.getLogger(MaterialController.class);
 

@@ -24,7 +24,7 @@ import com.protolounge.intercept.service.PrinterService;
  *
  */
 @RestController
-@RequestMapping("/printers")
+@RequestMapping("/printer")
 public class PrinterController {
     private final Logger log = LoggerFactory.getLogger(PrinterController.class);
     
