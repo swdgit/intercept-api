@@ -1,7 +1,19 @@
 package com.protolounge.intercept.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 /**
@@ -36,16 +48,19 @@ public class MVPPrintSpecification implements Serializable {
 	//bi-directional many-to-one association to MVPMaterial
 	@ManyToOne
 	@JoinColumn(name="mvp_material_id")
+	@JsonBackReference
 	private MVPMaterial mvpMaterial;
 
 	//bi-directional many-to-one association to MVPPrinter
 	@ManyToOne
 	@JoinColumn(name="mvp_printer_id")
+    @JsonBackReference
 	private MVPPrinter mvpPrinter;
 
 	//bi-directional many-to-one association to MVPSoftware
 	@ManyToOne
 	@JoinColumn(name="mvp_software_id")
+    @JsonBackReference
 	private MVPSoftware mvpSoftware;
 
 	public MVPPrintSpecification() {
@@ -59,6 +74,18 @@ public class MVPPrintSpecification implements Serializable {
 		this.mvpPrintSpecificationId = mvpPrintSpecificationId;
 	}
 
+	public void setMvpPrinterId(int mvpPrinterId) {
+	    mvpPrinter.setMvpPrinterId(mvpPrinterId);
+	}
+	
+	public void setMvpMaterialId(int mvpMaterialId) {
+	    mvpMaterial.setMvpMaterialId(mvpMaterialId);
+	}
+	
+	public void setMvpSoftwareId(int mvpSoftwareId) {
+	    mvpSoftware.setMvpSoftwareId(mvpSoftwareId);
+	}
+	
 	public String getNotes() {
 		return this.notes;
 	}

@@ -24,6 +24,7 @@ import com.protolounge.intercept.service.PrintSpecificationService;
  *
  */
 @RestController
+@RequestMapping("/ps")
 public class PrintSpecificationController {
     
     private final Logger log = LoggerFactory.getLogger(PrintSpecificationController.class);

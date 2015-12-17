@@ -1,7 +1,11 @@
 package com.protolounge.intercept.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -39,6 +43,7 @@ public class MVPMaterial implements Serializable {
 
 	//bi-directional many-to-one association to MVPPrintSpecification
 	@OneToMany(mappedBy="mvpMaterial")
+    @JsonManagedReference
 	private List<MVPPrintSpecification> mvpPrintSpecifications;
 
 	public MVPMaterial() {
