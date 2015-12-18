@@ -16,4 +16,6 @@ public interface PrintSpecificationService {
 
     public List<MVPPrintSpecification> getAllPrintSpecifications() throws ProtoLoungeException;
     public MVPPrintSpecification addPrintSpecification(MVPPrintSpecification mvpPrintSpecification) throws ProtoLoungeException;
+    
+    public List<MVPPrintSpecification> getPrinterSpecs(int mvpPrinterId, int mvpMaterialId) throws ProtoLoungeException;
 }

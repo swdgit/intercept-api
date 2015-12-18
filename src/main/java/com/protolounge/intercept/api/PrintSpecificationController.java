@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,11 +49,10 @@ public class PrintSpecificationController {
         return materials;
     }
     
-    @RequestMapping(
-            value="/add",
-            method=RequestMethod.POST,
-            consumes=MediaType.APPLICATION_JSON_VALUE,
-            produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/add",
+                    method=RequestMethod.POST,
+                    consumes=MediaType.APPLICATION_JSON_VALUE,
+                    produces=MediaType.APPLICATION_JSON_VALUE)
     public MVPPrintSpecification addMaterial(@RequestBody MVPPrintSpecification printSpec){
         try {
             printSpec = printSpecificationService.addPrintSpecification(printSpec);
@@ -61,5 +61,20 @@ public class PrintSpecificationController {
         }
         return printSpec;
     }
+
+    @RequestMapping(value="/specs/{printerId}/{materialId}",
+                    method=RequestMethod.GET,
+                    produces=MediaType.APPLICATION_JSON_VALUE) 
+    public List<MVPPrintSpecification> getPrinterSpecs(@PathVariable("printerId") int printerId,
+                                                       @PathVariable("materialId") int materialId) {
+        List<MVPPrintSpecification> specs = null;
+        try {
+            specs = printSpecificationService.getPrinterSpecs(printerId, materialId);
+        } catch (ProtoLoungeException e) {
+            log.error(e.getMessage());
+        }
+        return specs;
+    }
+
 
 }

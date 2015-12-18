@@ -53,6 +53,9 @@ public class PrintSpecificationServiceImpl implements PrintSpecificationService 
         }
         return mvpPrintSpecification;
     }
-    
-    
+
+    @Override
+    public List<MVPPrintSpecification> getPrinterSpecs(int mvpPrinterId, int mvpMaterialId) throws ProtoLoungeException {
+        return printSpecificationRepository.findByMVPPrinterIdAndMVPMaterialId(mvpPrinterId, mvpMaterialId);
+    }
 }

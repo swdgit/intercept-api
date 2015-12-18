@@ -11,8 +11,9 @@ function initPage() {
     // set the list, just the names, and the types to the 2 different list windows.
     $.getJSON('printer/all', function(data) {
         $.each(data, function(key, val) {
-            $("#printers").append("<li id=" + val.mvpPrinterId + "><input type='checkbox' name='" + val.mvpPrinterId + "'>" + val.name + "</input></li>");
+            $("#printers").append("<option value='" + val.mvpPrinterId + "'>" + val.name + "</option>");
         });
+        $("#printers").append("<option value='-1'>Add New Printer</option>");
     }).error(function(jqXHR, textStatus, errorThrown) {
         console.log("error " + textStatus);
         console.log("incoming Text " + jqXHR.responseText);
@@ -21,8 +22,9 @@ function initPage() {
     $.getJSON('material/all', function(data) {
         $.each(data, function(key, val) {
             var liValue = val.name + " " + val.size + "mm";
-            $("#filament").append("<li id=" + val.mvpMaterialId + "><input type='checkbox' name='" + val.mvpMaterialId + "' >" + liValue  + "</input></li>");
+            $("#materials").append("<option value='" + val.mvpMaterialId + "'>" + liValue  + "</option>");
         });
+        $("#materials").append("<option value='-1'>Add New Material</option>");
 
     }).error(function(jqXHR, textStatus, errorThrown) {
         console.log("error " + textStatus);

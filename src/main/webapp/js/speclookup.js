@@ -4,11 +4,15 @@
 /**
  * @param filamentId
  */
+
+var selectedPrinter = '0';
+var selectedMaterial = '0';
+
 function getPrinters(filamentId) {
     // get the printers that this filament will support
     $.getJSON('api/printers', function(data) {
         $.each(data, function(key, val) {
-            $("#printers").append("<li id=" + val.printerId + ">" + val.name + "</li>");
+            $("#printer").append("<li id=" + val.printerId + ">" + val.name + "</li>");
         });
     }).error(function(jqXHR, textStatus, errorThrown) {
         console.log("error " + textStatus);
@@ -24,7 +28,7 @@ function getFilaments(printerId) {
     $.getJSON('api/filament', function(data) {
         $.each(data, function(key, val) {
             var liValue = val.name + " " + val.color + " " + val.size;
-            $("#filament").append("<li id=" + val.filamentId + ">" + liValue  + "</li>");
+            $("#material").append("<li id=" + val.filamentId + ">" + liValue  + "</li>");
         });
 
     }).error(function(jqXHR, textStatus, errorThrown) {
@@ -37,8 +41,15 @@ function getFilaments(printerId) {
  * @param filamentId
  * @param printerId
  */
-function getSpec(filamentId, printerId) {
+function getSpec(materialId, printerId) {
     // if the filament id and the printer id are not null then pull up a spec that matches both.
     
-    
 }
+
+$('#printer li').click(function() {
+    selectedPrinter = $(this).attr('value');
+});
+
+$('#material li').click(function() {
+    selectedMaterial = $(this).attr('value');
+});

@@ -11,6 +11,7 @@
   <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="js/image_slide.js"></script>
   <script type="text/javascript" src="js/init.js"></script>
+  <script type="text/javascript" src="js/speclookup.js"></script>
   <script type="text/javascript" src="js/dialogs.js"></script>
 </head>
 
@@ -53,26 +54,27 @@
       </div><!--close content-->   
 	  
 	  <div class="container">
+
 	    <div class="ourwork"> <!-- printer list .. need to make this and materials a scrollable area with max length of say 10 each. -->
 	      <h3>Printers</h3>
-		  <ul class="matchLists" id="printers">
-          </ul>
-		  <div class="more">
-		    <a href="#" title="Add a new Printer if yours is not found." >Add a Printer</a>
-		  </div><!--close more-->      
+          <select class="matchLists" id="printers">
+          </select>
 	    </div><!--close ourwork-->
+
 	    <div class="testimonials"> <!-- specs  -->
 	      <h3>Print Specifications</h3>
-		  <p>Select a Printer to see Materials or select a Material to see the associated Printers.</p>	  
+		  <p>Select a Printer to see Materials or select a Material to see the associated Printers.</p>
+          <div class="more">
+            <a href="#" title="Get Specs" onclick="getSpec();" >Get Specs</a>
+          </div>
 	    </div><!--close testimonials-->	  
+
 	    <div class="projects"><!-- materials list -->
 	      <h3>Materials</h3>
-		  <ul class="matchLists" id="filament">
-          </ul>	  
-		  <div class="more">
-		    <a href="#" title="Add a new Filament if yours is not found." >Add a Filament</a>
-		  </div><!--close more-->        
+		  <select class="matchLists" id="materials">
+          </select>
 	    </div><!--close projects-->
+
 	  </div><!--close container-->
 	
 	</div><!--close site_content--> 
