@@ -21,7 +21,14 @@ public interface PrintSpecificationRepository extends Repository<MVPPrintSpecifi
     
     public MVPPrintSpecification save(MVPPrintSpecification mvpPrintSpecification);
 
-    @Query("SELECT mps FROM MVPPrintSpecification mps where mps.mvpPrinter.mvpPrinterId = :mvpPrinterId and mps.mvpMaterial.mvpMaterialId = :mvpMaterialId")
+//    @Query("SELECT mpvs, mps"
+//            + " FROM MVPSoftware mpvs inner join MVPPrintSpecification mps.mvpSoftware mps "
+//            + " where mps.mvpPrinter.mvpPrinterId = :mvpPrinterId and mps.mvpMaterial.mvpMaterialId = :mvpMaterialId")
+//    
+    
+    @Query("SELECT distinct mvps FROM MVPPrintSpecification mps join mps.mvpSoftware mvps "
+            + " where mps.mvpPrinter.mvpPrinterId   = :mvpPrinterId "
+            + "   and mps.mvpMaterial.mvpMaterialId = :mvpMaterialId")
     public List<MVPPrintSpecification> findByMVPPrinterIdAndMVPMaterialId(@Param("mvpPrinterId") int mvpPrinterId, 
                                                                           @Param("mvpMaterialId") int mvpMaterialId);
     

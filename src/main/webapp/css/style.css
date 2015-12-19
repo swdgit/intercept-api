@@ -47,7 +47,7 @@ h5, h6
   padding-bottom: 15px;}
 
 a, a:hover
-{ color: #FFF;
+{ color: blue;
   background: transparent;
   font-weight: bold;
   outline: none;
@@ -61,7 +61,7 @@ ul
   line-height: 1.7em;
   font-style: normal;
   font-size: 100%;}
-
+  
 ol
 { margin: 8px 0 22px 20px;}
 
@@ -292,7 +292,7 @@ ul#menu li:hover a
 
 #footer a, #footer a:hover
 { text-shadow: 1px 1px #000;
-  color: #FFF;
+  color: blue;
   text-decoration: underline;
   padding-bottom: 20px;}
 
@@ -386,6 +386,7 @@ ul.matchLists {
   height:  10em;   
   overflow-y: scroll;
 }
+
 .slideshow {
   width: 900px;
   height: 350px;

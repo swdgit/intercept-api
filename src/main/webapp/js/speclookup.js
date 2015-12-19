@@ -5,14 +5,12 @@
  * @param filamentId
  */
 
-var selectedPrinter = '0';
-var selectedMaterial = '0';
 
 function getPrinters(filamentId) {
     // get the printers that this filament will support
     $.getJSON('api/printers', function(data) {
         $.each(data, function(key, val) {
-            $("#printer").append("<li id=" + val.printerId + ">" + val.name + "</li>");
+            $("#printers").append("<li id=" + val.printerId + ">" + val.name + "</li>");
         });
     }).error(function(jqXHR, textStatus, errorThrown) {
         console.log("error " + textStatus);
@@ -28,7 +26,7 @@ function getFilaments(printerId) {
     $.getJSON('api/filament', function(data) {
         $.each(data, function(key, val) {
             var liValue = val.name + " " + val.color + " " + val.size;
-            $("#material").append("<li id=" + val.filamentId + ">" + liValue  + "</li>");
+            $("#materials").append("<li id=" + val.filamentId + ">" + liValue  + "</li>");
         });
 
     }).error(function(jqXHR, textStatus, errorThrown) {
@@ -41,15 +39,33 @@ function getFilaments(printerId) {
  * @param filamentId
  * @param printerId
  */
-function getSpec(materialId, printerId) {
+function getSpec() {
     // if the filament id and the printer id are not null then pull up a spec that matches both.
+    var selectedPrinter  = $( "#printers" ).val();
+    var selectedMaterial = $( "#materials" ).val();
     
+    $.getJSON('ps/specs/' + selectedPrinter + '/' + selectedMaterial, function(data) {
+        $.each(data, function(key, val) {
+            
+            // top level is software with recursive specs via mvpPrinterSpecifications
+            // e.g. Cura - [spec 1 , spec 2]
+//            <ul class="matchLists" id="specs">
+//              <li id="val.title">Cura
+//                <ul id="val.mvpSoftwareId">
+//                  <li id="val.mvpPrintSpecifications[i]"> val.mvpPrintSpecifications[i].title (url a href) </li>
+//                  <li id="val.mvpPrintSpecifications[i]"> val.mvpPrintSpecifications[i].title (url a href) </li>
+//                </ul>
+//              </li>
+//              etc
+//              <li>Repetier<ul><li>spec 1</li><li>spec 2</li></ul></li>
+//            </ul>
+            
+            $("#specs").append("<li id=" + val.mvpPrintSpecificationId + "><a href='" + val.profileFileUrl + "'> Profile : " + val.mvpPrintSpecificationId  + "</a></li>");
+            
+        });
+
+    }).error(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("incoming Text " + jqXHR.responseText);
+    });
 }
-
-$('#printer li').click(function() {
-    selectedPrinter = $(this).attr('value');
-});
-
-$('#material li').click(function() {
-    selectedMaterial = $(this).attr('value');
-});
