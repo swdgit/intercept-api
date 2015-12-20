@@ -7,6 +7,23 @@
  <artifactId>intercept-api</artifactId>
  <version>0.5.0</version>
 
+ <profiles>
+  <profile>
+   <id>dev</id>
+   <activation>
+    <activeByDefault>true</activeByDefault>
+   </activation>
+   <properties>
+    <resource.path>dev</resource.path>
+   </properties>
+  </profile>
+  <profile>
+   <id>prod</id>
+   <properties>
+    <resource.path>prod</resource.path>
+   </properties>
+  </profile>
+ </profiles>
  <parent>
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-parent</artifactId>
@@ -29,11 +46,10 @@
    <groupId>org.springframework.boot</groupId>
    <artifactId>spring-boot-starter-data-jpa</artifactId>
   </dependency>
-    <!-- mysql dependency -->
+  <!-- mysql dependency -->
   <dependency>
    <groupId>mysql</groupId>
    <artifactId>mysql-connector-java</artifactId>
-   <version>5.1.37</version>
   </dependency>
  </dependencies>
 
@@ -46,7 +62,7 @@
  <build>
   <resources>
    <resource>
-    <directory>src/main/resources</directory>
+    <directory>src/main/resources/${resource.path}</directory>
     <filtering>true</filtering>
    </resource>
   </resources>
@@ -54,6 +70,14 @@
    <plugin>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-maven-plugin</artifactId>
+   </plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.3</version>
+    <configuration>
+     <!-- put your configurations here -->
+    </configuration>
    </plugin>
   </plugins>
  </build>

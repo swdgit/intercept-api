@@ -46,6 +46,13 @@ function getSpec() {
     
     $.getJSON('ps/specs/' + selectedPrinter + '/' + selectedMaterial, function(data) {
         $.each(data, function(key, val) {
+            $("#specs").append("<li id='" + val.title + "'>" + val.title + "</li>");
+            
+            var softSpecs = val.mvpPrintSpecifications;
+            for (var i = 0; i < softSpecs.length; i++ ) {
+                var softSpec = val.mvpPrintSpecifications[i];
+                $("#specs").append("<li id='" + softSpec.mvpPrintSpecificationId + "'><a href='" + softSpec.profileFileUrl + "'>" + softSpec.title  + "</a></li>");
+            }
             
             // top level is software with recursive specs via mvpPrinterSpecifications
             // e.g. Cura - [spec 1 , spec 2]
@@ -60,8 +67,8 @@ function getSpec() {
 //              <li>Repetier<ul><li>spec 1</li><li>spec 2</li></ul></li>
 //            </ul>
             
-            $("#specs").append("<li id=" + val.mvpPrintSpecificationId + "><a href='" + val.profileFileUrl + "'> Profile : " + val.mvpPrintSpecificationId  + "</a></li>");
-            
+//            $("#specs").append("<li id='" + val.mvpPrintSpecificationId + "'><a href='" + val.profileFileUrl + "'> Profile : " + val.mvpPrintSpecificationId  + "</a></li>");
+
         });
 
     }).error(function(jqXHR, textStatus, errorThrown) {
